@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LM Studio Lab Wiki</title>
+<meta name="description" content="How-tos, settings, and terms for running language models in LM Studio on our lab computers.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/wiki.css">
+</head>
+<body>
+<header class="mobilebar">
+  <a class="brand" href="#start-here"><span class="brand-mark"><svg class="i " width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6"/><path d="M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3"/><path d="M7.5 15h9"/></svg></span><span>LM Studio Lab Wiki</span></a>
+  <span class="grow"></span>
+  <button type="button" class="icon-btn" data-open-search aria-label="Search"><svg class="i " width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+  <button type="button" class="icon-btn" id="menuBtn" aria-label="Open contents" aria-expanded="false" aria-controls="sideNav"><svg class="i " width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+</header>
+<div class="scrim" id="scrim" hidden></div>
+<aside class="sidebar" id="sideNav" aria-label="Contents">
+  <div class="sb-head">
+    <a class="brand" href="#start-here"><span class="brand-mark"><svg class="i " width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6"/><path d="M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3"/><path d="M7.5 15h9"/></svg></span><span>LM Studio Lab Wiki</span></a>
+    <button type="button" class="search-btn" data-open-search><svg class="i " width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><span class="keys"><kbd>Ctrl</kbd><kbd>K</kbd></span></button>
+  </div>
+  <nav class="sb-nav">
+      <p class="nav-group">Getting Started</p>
+      <a class="nav-link" href="#start-here">Start Here</a>
+      <a class="nav-link" href="#lab-rules">Lab Rules</a>
+      <a class="nav-link" href="#what-is-lm-studio">What LM Studio Is</a>
+      <a class="nav-link" href="#install">Install LM Studio</a>
+      <a class="nav-link" href="#developer-mode">User And Developer Mode</a>
+      <a class="nav-link" href="#get-around">Find Your Way Around</a>
+      <a class="nav-link" href="#language-theme">Language And Color Theme</a>
+      <a class="nav-link" href="#offline">What Works Offline</a>
+      <p class="nav-group">Models And Hardware</p>
+      <a class="nav-link" href="#model-listing">Read A Model Listing</a>
+      <a class="nav-link" href="#approved-models">Approved Models</a>
+      <a class="nav-link" href="#download-model">Download A Model</a>
+      <a class="nav-link" href="#library">The Library</a>
+      <a class="nav-link" href="#load-model">Load And Eject A Model</a>
+      <a class="nav-link" href="#fit-and-speed">Will It Fit? How Fast?</a>
+      <a class="nav-link" href="#hardware">CPU, Graphics, And The NPU</a>
+      <p class="nav-group">Chatting</p>
+      <a class="nav-link" href="#chats">Start And Organize Chats</a>
+      <a class="nav-link" href="#speed-stats">Read The Speed Stats</a>
+      <a class="nav-link" href="#context-length">Context Length And Tokens</a>
+      <p class="nav-group">Customize Your Assistant</p>
+      <a class="nav-link" href="#system-prompt">Write A System Prompt</a>
+      <a class="nav-link" href="#temperature">Temperature</a>
+      <a class="nav-link" href="#presets">Save And Use Presets</a>
+      <a class="nav-link" href="#test-and-improve">Test And Improve An Assistant</a>
+      <p class="nav-group">Documents</p>
+      <a class="nav-link" href="#attach-document">Attach A Document</a>
+      <a class="nav-link" href="#full-text-or-rag">Full Text Or Retrieval (RAG)</a>
+      <a class="nav-link" href="#grounding">Keep Answers Grounded</a>
+      <p class="nav-group">Server And API</p>
+      <a class="nav-link" href="#start-server">Start The Local Server</a>
+      <a class="nav-link" href="#http-basics">Client, Server, And HTTP</a>
+      <a class="nav-link" href="#endpoints">LM Studio’s Endpoints</a>
+      <a class="nav-link" href="#api-explorer">Use The API Explorer</a>
+      <a class="nav-link" href="#json">Write Valid JSON</a>
+      <a class="nav-link" href="#server-security">Server Security Settings</a>
+      <p class="nav-group">Agents</p>
+      <a class="nav-link" href="#agent-loop">Chatbots, Agents, And The Loop</a>
+      <a class="nav-link" href="#tool-definition">Write A Tool Definition</a>
+      <a class="nav-link" href="#permission-levels">Permission Levels</a>
+      <p class="nav-group">Capstone</p>
+      <a class="nav-link" href="#chatbot-shell">The Chatbot Shell</a>
+      <a class="nav-link" href="#knowledge-base">Build A Clean Knowledge Base</a>
+      <a class="nav-link" href="#test-plan">Test Plan And Failure Causes</a>
+      <p class="nav-group">Help</p>
+      <a class="nav-link" href="#shortcuts">Keyboard Shortcuts</a>
+      <a class="nav-link" href="#troubleshooting">Troubleshooting</a>
+      <a class="nav-link" href="#file-locations">Where LM Studio Keeps Things</a>
+      <a class="nav-link" href="#glossary">Glossary</a>
+      <p class="nav-group">Beyond Our Lab</p>
+      <a class="nav-link" href="#cli">The lms Command Line</a>
+      <a class="nav-link" href="#sdks">Python And TypeScript</a>
+      <a class="nav-link" href="#mcp">MCP Servers</a>
+      <a class="nav-link" href="#link-bionic-agents">LM Link, Bionic, Coding Agents</a>
+      <a class="nav-link" href="#advanced">Advanced Settings</a>
+      <a class="nav-link" href="#sources">Sources</a>
+  </nav>
+  <div class="sb-foot">
+    <span>Matches LM Studio 0.4.28</span>
+    <button type="button" class="icon-btn theme-btn" id="themeBtn" aria-label="Switch color theme"><svg class="i when-dark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="i when-light" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
+  </div>
+</aside>
+
+<div class="wrap">
+  <main class="content" id="content">
+<article class="page" id="start-here" hidden>
+  <p class="crumb">Getting Started</p>
+  <h1>Welcome to the LM Studio Lab Wiki</h1>
+  <p class="lead">How-tos, settings, and terms for running language models on our lab computers, from your first download to a chatbot you ship.</p>
+  <div class="page-meta"><span class="tag all">All assignments</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <h2 class="sec" id="start-here--explore-by-assignment">Explore by assignment</h2>
+    <div class="cards">
+      <a class="card" href="#install"><span class="card-ic"><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></span><span class="card-t">Assignment 1: Install, Size Up, Test Drive</span><span class="card-d">Install LM Studio, predict what your computer can run, and speed-test models.</span></a>
+      <a class="card" href="#system-prompt"><span class="card-ic"><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10M4 12h4M12 12h8M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></span><span class="card-t">Assignment 2: Make It Yours</span><span class="card-d">Build a custom assistant with a system prompt, temperature, and a preset.</span></a>
+      <a class="card" href="#attach-document"><span class="card-ic"><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg></span><span class="card-t">Assignment 3: Give It Something to Read</span><span class="card-d">Give a model documents to read and test when it answers from them.</span></a>
+      <a class="card" href="#start-server"><span class="card-ic"><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></svg></span><span class="card-t">Assignment 4: Open the Hood</span><span class="card-d">Run LM Studio as a server and send it requests the way an app does.</span></a>
+      <a class="card" href="#agent-loop"><span class="card-ic"><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></span><span class="card-t">Assignment 5: From Chatbot to Agent</span><span class="card-d">Run the agent loop by hand and design your own tools.</span></a>
+      <a class="card" href="#chatbot-shell"><span class="card-ic"><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h12l-2 4 2 4H5"/></svg></span><span class="card-t">Capstone: Build, Test, Ship</span><span class="card-d">Design, test, and release your own chatbot.</span></a>
+      <a class="card" href="#troubleshooting"><span class="card-ic"><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.7"/><path d="M12 17h.01"/></svg></span><span class="card-t">Troubleshooting</span><span class="card-d">Problems that come up in the lab, and what to try first.</span></a>
+      <a class="card" href="#glossary"><span class="card-ic"><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h14v16H6a2 2 0 0 0-2 2z"/><path d="M4 19a2 2 0 0 0 2 2h14"/><path d="M8 7h8"/></svg></span><span class="card-t">Glossary</span><span class="card-d">Every term from the course, A to Z.</span></a>
+    </div>
+    <h2 class="sec" id="start-here--how-this-wiki-works">How this wiki works</h2>
+    <p>Each page answers one question: how to do something in LM Studio, or what a word means. Browse the sidebar, or search with <kbd>Ctrl</kbd> + <kbd>K</kbd>. The tags under each page title show which assignments use it.</p>
+    <div class="tablewrap"><table>
+      <tr><th>Tag</th><th>Assignment</th><th>You learn to</th><th>Pages</th></tr>
+      <tr><td>A1</td><td>Install, Size Up, Test Drive</td><td>Install LM Studio, predict what your computer can run, then download and speed-test models</td><td>Getting started, Models and hardware, Chatting</td></tr>
+      <tr><td>A2</td><td>Make It Yours</td><td>Build a custom assistant with a system prompt, temperature, and a preset</td><td>Customize your assistant</td></tr>
+      <tr><td>A3</td><td>Give It Something to Read</td><td>Give a model documents to read and test when it answers from them</td><td>Documents</td></tr>
+      <tr><td>A4</td><td>Open the Hood</td><td>Run LM Studio as a server and send it requests the way an app does</td><td>Server and API</td></tr>
+      <tr><td>A5</td><td>From Chatbot to Agent</td><td>Run the agent loop by hand and design tools</td><td>Agents</td></tr>
+      <tr><td>Capstone</td><td>Build, Test, Ship</td><td>Design, test, and release your own chatbot</td><td>Capstone, plus everything above</td></tr>
+    </table></div>
+    <div class="callout"><p>Your assignment handout tells you what to do. Some handouts use older LM Studio names, like Discover or My Models; <a href="#get-around">Find your way around</a> lists today’s names. If anything else disagrees, follow the handout and tell your teacher.</p></div><div class="callout warn"><p>Pages tagged <strong>Not in class</strong> explain features you’ll see in the LM Studio docs but won’t use on our lab computers.</p></div>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="lab-rules" hidden>
+  <p class="crumb">Getting Started</p>
+  <h1>Lab rules</h1>
+  <p class="lead">The rules for every LM Studio session in our lab.</p>
+  <div class="page-meta"><span class="tag all">All assignments</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <ul>
+      <li>Download only models from the <a href="#approved-models">approved list</a>. Want to try something else? Get teacher approval first.</li>
+      <li>Stay local. Don’t sign in, and don’t turn on features that connect to other devices.</li>
+      <li>Close apps and browser tabs you don’t need before loading a model. The model shares your 16 GB of RAM with everything else.</li>
+      <li>Load one model at a time. Eject the current model before loading the next one.</li>
+      <li>Treat model answers as unverified. Small models make mistakes with total confidence.</li>
+      <li>Keep <strong>Serve on Local Network</strong> off whenever the server runs.</li>
+      <li>At the end of class, stop the server and turn <strong>Enable CORS</strong> off.</li>
+      <li>Keep personal information, passwords, and account details out of your documents, prompts, and knowledge bases.</li>
+      <li>Every document or knowledge base source you add needs teacher approval.</li>
+    </ul>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="what-is-lm-studio" hidden>
+  <p class="crumb">Getting Started</p>
+  <h1>What LM Studio is</h1>
+  <p class="lead">A desktop app that downloads language models and runs them on your own computer.</p>
+  <div class="page-meta"><span class="tag">A1</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <p>LM Studio searches for and downloads open-weight models from Hugging Face, then runs them on your machine. Once a model is downloaded, chatting, attaching documents, and running the local server all work without the internet. Nothing you type in a chat leaves your computer.</p>
+    <h2 class="sec" id="what-is-lm-studio--three-tools-with-similar-names">Three tools with similar names</h2>
+    <div class="tablewrap"><table>
+      <tr><th>Name</th><th>What it is</th><th>In our lab</th></tr>
+      <tr><td>LM Studio app</td><td>The desktop app with the chat window, model search, and settings</td><td>Yes, this is what we use</td></tr>
+      <tr><td>lms</td><td>The command-line tool that comes with the app. It can download and load models, start the server, and chat in a terminal.</td><td>Only when your teacher says so</td></tr>
+      <tr><td>llmster</td><td>LM Studio without a window, for servers and machines with no screen</td><td>No</td></tr>
+    </table></div>
+    <h2 class="sec" id="what-is-lm-studio--lm-studio-or-lm-studio-bionic">LM Studio or LM Studio Bionic?</h2>
+    <p>The download page offers two apps. Bionic is a separate agent app for coding and document work, and it can use cloud models that cost credits. We use the classic LM Studio app.</p>
+    <p class="more">More in the official docs: <a href="https://lmstudio.ai/docs/app/basics/lmstudio-vs-llmster-vs-lms" target="_blank" rel="noopener">LM Studio, llmster, and lms</a>, <a href="https://lmstudio.ai/docs/bionic" target="_blank" rel="noopener">Welcome to LM Studio Bionic</a></p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="install" hidden>
+  <p class="crumb">Getting Started</p>
+  <h1>Install LM Studio</h1>
+  <p class="lead">Get the classic Windows app, skip the account, and turn on Developer mode.</p>
+  <div class="page-meta"><span class="tag">A1</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <ol>
+      <li>Go to the official <a href="https://lmstudio.ai/download" target="_blank" rel="noopener">LM Studio download page</a>. Scroll past “Download LM Studio Bionic” and choose <strong>Download LM Studio for Windows</strong>. This wiki matches version 0.4.28.</li>
+      <li>Run the installer with the default settings. If Windows asks for an administrator password, ask your teacher.</li>
+      <li>Open LM Studio. If it asks you to sign in or create an account, skip it. Nothing in class needs an account.</li>
+      <li>Turn on <a href="#developer-mode">Developer mode</a>: Settings › Developer.</li>
+    </ol>
+    <p class="more">More in the official docs: <a href="https://lmstudio.ai/docs/app/basics" target="_blank" rel="noopener">Get started with LM Studio</a>, <a href="https://lmstudio.ai/docs/app/system-requirements" target="_blank" rel="noopener">System requirements</a></p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="developer-mode" hidden>
+  <p class="crumb">Getting Started</p>
+  <h1>User and Developer mode</h1>
+  <p class="lead">Developer mode shows the load settings, speed stats, and server tools we use. Turn it on once.</p>
+  <div class="page-meta"><span class="tag all">All assignments</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <div class="tablewrap"><table>
+      <tr><th>Mode</th><th>What you see</th></tr>
+      <tr><td>User</td><td>Only the chat. LM Studio picks every setting for you.</td></tr>
+      <tr><td>Developer</td><td>Everything: load and inference settings, keyboard shortcuts, and developer features such as the local server</td></tr>
+    </table></div>
+    <ol>
+      <li>Open Settings (<kbd>Ctrl</kbd> + <kbd>,</kbd>).</li>
+      <li>Go to <strong>Developer</strong> and turn Developer mode on.</li>
+    </ol>
+    <div class="callout"><p>A few older pages of the LM Studio docs say “Power User mode.” Developer mode replaced it, so use Developer mode wherever you see that name.</p></div>
+    <p class="more">More in the official docs: <a href="https://lmstudio.ai/docs/app/user-interface/modes" target="_blank" rel="noopener">User or Developer</a></p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="get-around" hidden>
+  <p class="crumb">Getting Started</p>
+  <h1>Find your way around</h1>
+  <p class="lead">The parts of LM Studio 0.4.28 you’ll use, what each is for, and their older names.</p>
+  <div class="page-meta"><span class="tag all">All assignments</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <div class="tablewrap"><table>
+      <tr><th>In the left sidebar</th><th>What you do there</th><th>Older name</th></tr>
+      <tr><td>Chat</td><td>Load a model, chat, and attach documents</td><td>Same</td></tr>
+      <tr><td>Model Server</td><td>Load a model for the server, open Server Settings, and switch the server on and off</td><td>Developer tab</td></tr>
+      <tr><td>Library</td><td>See downloaded models and their details, set each model’s default settings, and see where models are stored</td><td>My Models</td></tr>
+      <tr><td>Model Search</td><td>Search for models and download them</td><td>Discover</td></tr>
+      <tr><td>LM Link</td><td>Connect to your other devices. Not used in class.</td><td>New feature</td></tr>
+      <tr><td>Settings (gear at the bottom left, or <kbd>Ctrl</kbd> + <kbd>,</kbd>)</td><td>Developer mode, language, and color theme</td><td>Same</td></tr>
+    </table></div>
+    <p>Handouts and the LM Studio docs may still use the older names.</p>
+    <h2 class="sec" id="get-around--around-the-chat">Around the chat</h2>
+    <div class="tablewrap"><table>
+      <tr><th>Where</th><th>What it is</th></tr>
+      <tr><td>Top center</td><td>The model picker, the bar with the model’s name. The gear icon to its left opens the load settings, and the eject button (⏏) to its right unloads the model.</td></tr>
+      <tr><td>Right sidebar, Model Parameters tab (sliders icon)</td><td>The Preset menu, the System Prompt box, and Settings such as Temperature</td></tr>
+    </table></div>
+    <p>More keys are on the <a href="#shortcuts">Keyboard shortcuts</a> page.</p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="language-theme" hidden>
+  <p class="crumb">Getting Started</p>
+  <h1>Language and color theme</h1>
+  <p class="lead">Use LM Studio in another language, or switch between light and dark.</p>
+  <div class="page-meta"><span class="tag all">All assignments</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <h2 class="sec" id="language-theme--change-the-language">Change the language</h2>
+    <p>Open Settings (<kbd>Ctrl</kbd> + <kbd>,</kbd>) and pick a language under Preferences › Language. LM Studio comes in more than 30 languages, including Spanish, Portuguese, Chinese, Vietnamese, Arabic, and Hindi. Our handouts use the English names for settings, such as Temperature.</p>
+    <h2 class="sec" id="language-theme--change-the-theme">Change the theme</h2>
+    <p>Press <kbd>Ctrl</kbd> + <kbd>K</kbd>, then <kbd>T</kbd>, to open the theme picker, or choose a theme in Settings. Auto follows your Windows light or dark setting.</p>
+    <p class="more">More in the official docs: <a href="https://lmstudio.ai/docs/app/user-interface/languages" target="_blank" rel="noopener">LM Studio in your language</a>, <a href="https://lmstudio.ai/docs/app/user-interface/themes" target="_blank" rel="noopener">Color themes</a></p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="offline" hidden>
+  <p class="crumb">Getting Started</p>
+  <h1>What works offline</h1>
+  <p class="lead">Once a model is downloaded, LM Studio doesn’t need the internet.</p>
+  <div class="page-meta"><span class="tag">A1</span><span class="tag">A3</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <div class="tablewrap"><table>
+      <tr><th>Works offline</th><th>Needs the internet</th></tr>
+      <tr><td>Chatting with downloaded models</td><td>Searching for models in Model Search</td></tr>
+      <tr><td>Chatting with documents</td><td>Downloading models</td></tr>
+      <tr><td>Running the local server</td><td>Downloading runtimes (the engines that run models)</td></tr>
+      <tr><td></td><td>Checking for app updates</td></tr>
+    </table></div>
+    <p>When you chat with a downloaded model, nothing you enter leaves your device. Documents you attach are processed on your computer too.</p>
+    <p class="more">More in the official docs: <a href="https://lmstudio.ai/docs/app/offline" target="_blank" rel="noopener">Offline operation</a></p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="model-listing" hidden>
+  <p class="crumb">Models And Hardware</p>
+  <h1>Read a model listing</h1>
+  <p class="lead">Parameters, quantization, file size, and uploader tell you what you’re about to download.</p>
+  <div class="page-meta"><span class="tag">A1</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <div class="tablewrap"><table>
+      <tr><th>Term</th><th>What it means</th></tr>
+      <tr><td>Parameters</td><td>The model’s learned numbers. “4B” means about 4 billion. More parameters usually means smarter but bigger and slower.</td></tr>
+      <tr><td>Quantization</td><td>Compressing those numbers to save space. Q4 stores each one in about 4 bits. Lower Q means a smaller file and slightly lower quality. You’ll see names like Q4_K_M, Q6_K, and Q8_0.</td></tr>
+      <tr><td>File size</td><td>Disk space, and a starting point for how much RAM the model needs (see <a href="#fit-and-speed">Will it fit?</a>)</td></tr>
+      <tr><td>Uploaded by</td><td>The person or group who published this copy of the file</td></tr>
+      <tr><td>Fit label</td><td>LM Studio’s estimate of whether the model fits your machine, when it shows one</td></tr>
+    </table></div>
+    <p>The different quantizations of a model are all copies of the same model at different levels of fidelity. LM Studio’s docs suggest a 4-bit option or higher if your machine can run it. In class, choose <strong>Q4_K_M</strong> when it’s offered.</p>
+    <p>Model files for our Windows computers end in <code>.gguf</code>, the format LM Studio’s llama.cpp engine runs. Files labeled MLX only run on Apple Silicon Macs.</p>
+    <div class="callout warn"><p>Some uploads on Hugging Face are “uncensored” copies with their safety training removed. The approved list avoids these.</p></div>
+    <p class="more">More in the official docs: <a href="https://lmstudio.ai/docs/app/basics/download-model" target="_blank" rel="noopener">Download an LLM</a></p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="approved-models" hidden>
+  <p class="crumb">Models And Hardware</p>
+  <h1>Approved models</h1>
+  <p class="lead">Use only these models in class unless your teacher approves another.</p>
+  <div class="page-meta"><span class="tag">A1</span><span class="tag">A2</span><span class="tag">A3</span><span class="tag">A4</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <p>Sizes are approximate 4-bit (Q4) downloads. The exact size in LM Studio varies by version, so record what you actually see. (<a href="https://localaimaster.com/blog/small-language-models-guide-2026" target="_blank" rel="noopener">sizes source</a>)</p>
+    <div class="tablewrap"><table>
+      <tr><th>Tier</th><th>Model</th><th>Maker</th><th>Parameters</th><th>Approx. size</th></tr>
+      <tr><td>Speed baseline</td><td>Llama 3.2 1B</td><td>Meta</td><td>1B</td><td>1.3 GB</td></tr>
+      <tr><td>Sweet spot</td><td>Llama 3.2 3B</td><td>Meta</td><td>3B</td><td>2.2 GB</td></tr>
+      <tr><td>Sweet spot</td><td>Phi-4-mini</td><td>Microsoft</td><td>3.8B</td><td>2.2 GB</td></tr>
+      <tr><td>Sweet spot</td><td>Gemma 3 4B</td><td>Google</td><td>4B</td><td>3 GB</td></tr>
+      <tr><td>Sweet spot</td><td>Qwen 3.5 4B</td><td>Alibaba</td><td>4B</td><td>3.4 GB</td></tr>
+      <tr><td>Stretch (optional)</td><td>Ministral 3 8B</td><td>Mistral</td><td>8B</td><td>6.0 GB</td></tr>
+      <tr><td>Stretch (optional)</td><td>Qwen 3.5 9B</td><td>Alibaba</td><td>9B</td><td>6.6 GB</td></tr>
+    </table></div>
+    <div class="callout stop"><p>gpt-oss-20b (about 13 GB) appears in Assignment 1 for predictions only. Don’t download it.</p></div>
+    <p>Your teacher picks the model for Assignment 5 and the capstone. Not every model handles tools well.</p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="download-model" hidden>
+  <p class="crumb">Models And Hardware</p>
+  <h1>Download a model</h1>
+  <p class="lead">Find the model in Model Search, pick the Q4_K_M version, and download it.</p>
+  <div class="page-meta"><span class="tag">A1</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <ol>
+      <li>Open <strong>Model Search</strong> in the left sidebar.</li>
+      <li>Search for an approved model by name, such as <em>Llama 3.2 1B</em>. You can also search with a publisher/model name or paste a full Hugging Face link.</li>
+      <li>Click a result to see its versions. Most models come in several quantizations.</li>
+      <li>Check the file size and any fit label LM Studio shows for your machine.</li>
+      <li>Choose the <strong>Q4_K_M</strong> version and download it.</li>
+      <li>Open <strong>Library</strong> in the left sidebar to confirm it’s there. See <a href="#library">The Library</a>.</li>
+    </ol>
+    <p>Downloading needs a stable internet connection. Models run several gigabytes, so start big downloads early.</p>
+    <p>If your teacher already put models on your machine, you can still use Model Search to read the listings.</p>
+    <p class="more">More in the official docs: <a href="https://lmstudio.ai/docs/app/basics/download-model" target="_blank" rel="noopener">Download an LLM</a></p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="library" hidden>
+  <p class="crumb">Models And Hardware</p>
+  <h1>The Library</h1>
+  <p class="lead">Every model on your computer, plus each model’s details and default settings.</p>
+  <div class="page-meta"><span class="tag">A1</span><span class="tag">A2</span><span class="tag">A3</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <figure class="shot">
+      <div class="scroll"><img src="images/library.png" loading="lazy" alt="The LM Studio 0.4.28 Library page. Red boxes mark Library in the left sidebar and the row for a downloaded model, gemma-4-e4b, showing its architecture, 7.5B parameters, publisher lmstudio-community, Q4_K_M quantization, and 6.3 GB size." width="1576" height="450"></div>
+      <figcaption>Open <strong>Library</strong> in the left sidebar. Each row is a model on this computer. The list under My Models filters by type, and <strong>Filter models</strong> (<kbd>Ctrl</kbd> + <kbd>F</kbd>) searches by name.</figcaption>
+    </figure>
+    <h2 class="sec" id="library--read-the-columns">Read the columns</h2>
+    <div class="tablewrap"><table>
+      <tr><th>Column</th><th>What it shows</th></tr>
+      <tr><td>Params</td><td>Parameters, such as 7.5B</td></tr>
+      <tr><td>Publisher</td><td>Who uploaded this copy of the model (“Uploaded by” in Assignment 1)</td></tr>
+      <tr><td>Quant</td><td>Quantization, such as Q4_K_M</td></tr>
+      <tr><td>Size</td><td>File size on disk</td></tr>
+    </table></div>
+    <p>The bar at the bottom of the Library shows how much disk space your models use and the folder they’re stored in.</p>
+    <h2 class="sec" id="library--open-a-model-s-panel">Open a model’s panel</h2>
+    <p>Select a model in the list to open its panel on the right. <strong>Use in New Chat</strong> starts a chat with it, and <strong>Load Model</strong> loads it. The panel has three tabs.</p>
+    <figure class="shot">
+      <div class="scroll"><img src="images/library-info.png" loading="lazy" alt="The model panel with the Info tab selected. Red boxes mark the Info tab and the Model Information list: model, file, format GGUF, quantization Q4_K_M, architecture, capabilities, domain, and size on disk." width="920" height="460"></div>
+      <figcaption><strong>Info</strong> lists the model’s file, format (GGUF), quantization, architecture, capabilities such as vision, tool use, and reasoning, and its exact size on disk.</figcaption>
+    </figure>
+    <figure class="shot">
+      <div class="scroll"><img src="images/library-load.png" loading="lazy" alt="The model panel with the Load tab selected. Red boxes mark the Load tab and the Context and Offload settings: Context Length 8192, with the model supporting up to 131072 tokens, and GPU Offload 17." width="920" height="380"></div>
+      <figcaption><strong>Load</strong> sets this model’s default Context Length and GPU Offload. LM Studio uses them every time the model loads. More options are under Advanced.</figcaption>
+    </figure>
+    <figure class="shot">
+      <div class="scroll"><img src="images/library-inference.png" loading="lazy" alt="The model panel with the Inference tab selected. Red boxes mark the Inference tab, the System Prompt box, and the Temperature setting, set to 1." width="920" height="680"></div>
+      <figcaption><strong>Inference</strong> sets a default System Prompt, Temperature, and other settings for this model.</figcaption>
+    </figure>
+    <div class="callout warn"><p>In Assignments 2 and 3, you set the system prompt and temperature in the chat’s Model Parameters tab and save them as presets. Leave the Library’s Inference tab empty unless a handout says otherwise, so a default set here doesn’t change your test results.</p></div>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="load-model" hidden>
+  <p class="crumb">Models And Hardware</p>
+  <h1>Load and eject a model</h1>
+  <p class="lead">Loading puts the model into RAM so you can chat with it. Eject it before loading another.</p>
+  <div class="page-meta"><span class="tag">A1</span><span class="tag">A2</span><span class="tag">A3</span><span class="tag">A4</span><span class="tag">A5</span><span class="tag">Capstone</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <ol>
+      <li>In <strong>Chat</strong>, click the model picker at the top of the window (the bar that shows the model’s name) and select one of your downloaded models. For the server in Assignments 4 and 5, load the model on the <strong>Model Server</strong> page instead.</li>
+      <li>Wait for it to finish loading.</li>
+      <li>To change load settings, click the gear icon to the left of the model name, make your change, and select <strong>Reload to apply changes</strong>.</li>
+    </ol>
+    <p>Loading means setting aside enough RAM to hold the model’s weights. To eject a model, click the eject button (⏏) to the right of its name. Eject it when you’re done, or before you load a different model.</p>
+    <h2 class="sec" id="load-model--load-settings-you-ll-change">Load settings you’ll change</h2>
+    <div class="tablewrap"><table>
+      <tr><th>Setting</th><th>What it does</th><th>When we change it</th></tr>
+      <tr><td>Context Length</td><td>How much text the model can hold at once. Bigger uses more RAM. See <a href="#context-length">Context length</a>.</td><td>Assignment 3 sets 4096. Otherwise leave the default; don’t raise it.</td></tr>
+      <tr><td>GPU Offload</td><td>How much of the model runs on the graphics chip instead of the CPU. 0 is CPU only; the maximum puts as much as possible on graphics.</td><td>Assignment 1, Part 4</td></tr>
+    </table></div>
+    <figure class="shot">
+      <div class="scroll"><img src="images/load-settings.png" loading="lazy" alt="LM Studio 0.4.28 with the load settings panel open under the model name. Red boxes mark the Context Length setting, set to 8192 with the model supporting up to 131072 tokens, and the GPU Offload setting, set to 38." width="1320" height="570"></div>
+      <figcaption>LM Studio 0.4.28 with a model loaded. Click the gear icon to the left of the model name to open its load settings. After you change Context Length or GPU Offload, select <strong>Reload to apply changes</strong>.</figcaption>
+    </figure>
+    <h2 class="sec" id="load-model--save-a-model-s-default-settings">Save a model’s default settings</h2>
+    <p>In <a href="#library">Library</a>, select a model and open its Load tab to set its default Context Length and GPU Offload. LM Studio uses them every time that model loads. If you change settings while loading, you can also save them as that model’s defaults.</p>
+    <p class="more">More in the official docs: <a href="https://lmstudio.ai/docs/app/basics" target="_blank" rel="noopener">Get started</a>, <a href="https://lmstudio.ai/docs/app/advanced/per-model" target="_blank" rel="noopener">Per-model defaults</a></p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="fit-and-speed" hidden>
+  <p class="crumb">Models And Hardware</p>
+  <h1>Will it fit? How fast?</h1>
+  <p class="lead">Two rules of thumb predict whether a model will load and roughly how fast it will write.</p>
+  <div class="page-meta"><span class="tag">A1</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <h2 class="sec" id="fit-and-speed--will-it-fit">Will it fit?</h2>
+    <p>A model needs about its file size in RAM, plus 1 to 2 GB for the conversation and overhead. Windows and your open apps also need room.</p>
+    <h2 class="sec" id="fit-and-speed--how-fast">How fast?</h2>
+    <p>To write each token, the computer reads the whole model from memory. So the speed limit is how fast memory can move data (bandwidth) divided by the model’s size.</p>
+    <div class="formula">
+      <div>Bandwidth (GB/s) = Memory speed (MT/s) × 8 × channels ÷ 1000</div>
+      <div>Max tokens per second ≈ Bandwidth (GB/s) ÷ Model size (GB)</div>
+    </div>
+    <p>Use the number of RAM sticks as “channels.” Real-world speed usually lands well below this maximum, often around half to two-thirds of it.</p>
+    <h2 class="sec" id="fit-and-speed--worked-example-a-made-up-laptop-not-your-lab-com">Worked example (a made-up laptop, not your lab computer)</h2>
+    <p>Two RAM sticks at 6000 MT/s, running a 3.0 GB model:</p>
+    <ul>
+      <li>Bandwidth = 6000 × 8 × 2 ÷ 1000 = 96 GB/s</li>
+      <li>Max ≈ 96 ÷ 3.0 = 32 tokens per second</li>
+      <li>Realistic ≈ 16 to 21 tokens per second (half to two-thirds of 32)</li>
+    </ul>
+    <div class="callout"><p>About 7 tokens per second feels like normal reading speed.</p></div>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="hardware" hidden>
+  <p class="crumb">Models And Hardware</p>
+  <h1>CPU, graphics, and the NPU</h1>
+  <p class="lead">Which parts of the computer LM Studio can use, and how to switch between them.</p>
+  <div class="page-meta"><span class="tag">A1</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <div class="tablewrap"><table>
+      <tr><th>Part</th><th>Our lab computers</th><th>Role in LM Studio</th></tr>
+      <tr><td>Processor (CPU)</td><td>Intel Core i5 (Arrow Lake)</td><td>Can run the whole model</td></tr>
+      <tr><td>Integrated graphics</td><td>Intel graphics built into the processor; no separate graphics card</td><td>Can run part or all of the model through GPU Offload</td></tr>
+      <tr><td>NPU</td><td>Built into the processor</td><td>Not used by LM Studio (Assignment 1 asks you to research why)</td></tr>
+      <tr><td>RAM</td><td>16 GB on one stick (single channel)</td><td>Holds the model while it runs; its bandwidth sets the speed limit</td></tr>
+    </table></div>
+    <h2 class="sec" id="hardware--see-your-engines-runtimes">See your engines (runtimes)</h2>
+    <p>Press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>R</kbd> to open the runtime settings. Runtimes are the engines that run models, such as a CPU engine or Vulkan for graphics.</p>
+    <h2 class="sec" id="hardware--switch-between-cpu-and-graphics">Switch between CPU and graphics</h2>
+    <p>Set <strong>GPU Offload</strong> in the load settings: 0 runs on the CPU only, and the maximum puts as much as possible on the integrated graphics. To change it, click the gear icon next to the model name, then select <strong>Reload to apply changes</strong>. If the setting is grayed out, write that down and tell your teacher. The screenshot on <a href="#load-model">Load and eject a model</a> shows where GPU Offload is.</p>
+    <p>For reference, LM Studio recommends at least 16 GB of RAM on Windows, and a graphics card with at least 4 GB of its own memory (VRAM) for graphics acceleration. The processor must support AVX2.</p>
+    <p class="more">More in the official docs: <a href="https://lmstudio.ai/docs/app/system-requirements" target="_blank" rel="noopener">System requirements</a></p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="chats" hidden>
+  <p class="crumb">Chatting</p>
+  <h1>Start and organize chats</h1>
+  <p class="lead">New chats, folders, copies, and two chats side by side.</p>
+  <div class="page-meta"><span class="tag">A1</span><span class="tag">A2</span><span class="tag">A3</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <div class="tablewrap"><table>
+      <tr><th>To do this</th><th>Do this</th></tr>
+      <tr><td>Start a new chat</td><td>Click <strong>+</strong>, or press <kbd>Ctrl</kbd> + <kbd>N</kbd></td></tr>
+      <tr><td>Make a folder</td><td>Click the new folder button, or press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>N</kbd></td></tr>
+      <tr><td>Move a chat</td><td>Drag it into or out of a folder. Folders can go inside folders.</td></tr>
+      <tr><td>Copy a chat</td><td><strong>•••</strong> menu › Duplicate. Attached files are copied too.</td></tr>
+      <tr><td>See two chats side by side</td><td>Drag a chat tab to one half of the window, or use the split view icon at the top right. Close a side with its <strong>x</strong>.</td></tr>
+    </table></div>
+    <div class="callout warn"><p>Start a new chat for each test prompt. Earlier messages slow the model down and can change its answer.</p></div>
+    <div class="callout"><p>The model doesn’t learn from your chats. It only knows what’s in the current chat and in settings such as the system prompt.</p></div>
+    <p class="more">More in the official docs: <a href="https://lmstudio.ai/docs/app/basics/chat" target="_blank" rel="noopener">Manage chats</a></p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="speed-stats" hidden>
+  <p class="crumb">Chatting</p>
+  <h1>Read the speed stats</h1>
+  <p class="lead">Every response shows how fast it was written and how long it took to start.</p>
+  <div class="page-meta"><span class="tag">A1</span><span class="tag">A3</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <p>After each response, read the stats shown under it. Developer mode must be on.</p>
+    <div class="tablewrap"><table>
+      <tr><th>Stat</th><th>What it tells you</th></tr>
+      <tr><td>Tokens per second (tok/s)</td><td>How fast the model writes. About 7 tok/s feels like normal reading speed.</td></tr>
+      <tr><td>Time to first token</td><td>How long you waited before the answer started appearing</td></tr>
+      <tr><td>Token count</td><td>How many tokens the answer used</td></tr>
+    </table></div>
+    <p>For a fair comparison, use the same prompt typed exactly the same way, a new chat each time, and only one model loaded.</p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="context-length" hidden>
+  <p class="crumb">Chatting</p>
+  <h1>Context length and tokens</h1>
+  <p class="lead">A model’s working memory is measured in tokens, and it has a limit.</p>
+  <div class="page-meta"><span class="tag">A1</span><span class="tag">A3</span><span class="tag">A4</span><span class="tag">Capstone</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <p>A <strong>token</strong> is a chunk of text, roughly three-quarters of a word. Models read and write in tokens.</p>
+    <p><strong>Context length</strong> is how much text the model can hold at once: the system prompt, any attached document, your messages, and its replies, all together.</p>
+    <ul>
+      <li>You set it with <strong>Context Length</strong> in the load settings (see the screenshot on <a href="#load-model">Load and eject a model</a>). The same panel shows the most the model supports, such as “Model supports up to 131072 tokens.”</li>
+      <li>A bigger context uses more RAM.</li>
+      <li>When a long chat starts to drag or forget its rules, start a new chat.</li>
+    </ul>
+    <div class="callout"><p>Assignment 3 asks everyone to load with Context Length 4096, so results are comparable across the class.</p></div>
+    <p class="more">More in the official docs: <a href="https://lmstudio.ai/docs/app/basics/rag" target="_blank" rel="noopener">Chat with documents</a> (see Terminology)</p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="system-prompt" hidden>
+  <p class="crumb">Customize Your Assistant</p>
+  <h1>Write a system prompt</h1>
+  <p class="lead">Instructions the model reads before every message. They set the assistant’s role, rules, and style.</p>
+  <div class="page-meta"><span class="tag">A2</span><span class="tag">A3</span><span class="tag">A4</span><span class="tag">A5</span><span class="tag">Capstone</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <h2 class="sec" id="system-prompt--where-it-goes">Where it goes</h2>
+    <p>In Chat, open the right sidebar’s <strong>Model Parameters</strong> tab (sliders icon) and type into the <strong>System Prompt</strong> box. <kbd>Ctrl</kbd> + <kbd>E</kbd> opens a bigger editor. When a task asks for no instructions, make sure no preset is selected and the box is empty. If the right sidebar is hidden, use the panel button in the top-right corner of the window.</p>
+    <figure class="shot">
+      <div class="scroll"><img src="images/system-prompt-temperature.png" loading="lazy" alt="LM Studio 0.4.28 with the right sidebar open on the Model Parameters tab. Red boxes mark the System Prompt box near the top and the Temperature setting, set to 1, under Settings." width="1320" height="700"></div>
+      <figcaption>The <strong>Model Parameters</strong> tab (sliders icon) in the right sidebar. The System Prompt box is near the top, and Temperature is under Settings. The Save Preset As… button sits just above the System Prompt.</figcaption>
+    </figure>
+    <h2 class="sec" id="system-prompt--the-pieces-of-a-strong-system-prompt">The pieces of a strong system prompt</h2>
+    <div class="tablewrap"><table>
+      <tr><th>Piece</th><th>What it tells the model</th><th>Example</th></tr>
+      <tr><td>Role</td><td>Who it is</td><td>You are a study coach for 9th-grade biology.</td></tr>
+      <tr><td>Audience</td><td>Who it’s talking to</td><td>The user is a high school student reviewing for a quiz.</td></tr>
+      <tr><td>Task</td><td>What to do</td><td>Ask one quiz question at a time.</td></tr>
+      <tr><td>Rules</td><td>Do’s and don’ts</td><td>Give a hint before revealing an answer.</td></tr>
+      <tr><td>Format</td><td>Length and structure</td><td>Keep every reply under 80 words.</td></tr>
+      <tr><td>Boundaries</td><td>What to do with off-topic requests</td><td>If asked about anything else, remind the user what you are for.</td></tr>
+    </table></div>
+    <h2 class="sec" id="system-prompt--sample-for-a-different-job-don-t-copy-it">Sample (for a different job; don’t copy it)</h2>
+    <blockquote>You are a study coach for 9th-grade biology students. When the student names a topic, ask one quiz question at a time and wait for their answer. If they are right, say so in one sentence and ask a harder question. If they are wrong, give a hint before giving the answer. Keep every reply under 80 words. If the student asks about something other than biology, remind them that you only help with biology review.</blockquote>
+    <h2 class="sec" id="system-prompt--tips">Tips</h2>
+    <ul>
+      <li>Small models follow short, specific instructions better than long ones. If a rule isn’t working, make it shorter and more direct before adding more rules.</li>
+      <li>Put your most important rule early in the prompt.</li>
+      <li>Change only one or two things each round, so you can tell what actually helped.</li>
+    </ul>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="temperature" hidden>
+  <p class="crumb">Customize Your Assistant</p>
+  <h1>Temperature</h1>
+  <p class="lead">A setting that controls randomness. Low is predictable and consistent; high is varied and creative, and sometimes off track.</p>
+  <div class="page-meta"><span class="tag">A2</span><span class="tag">A4</span><span class="tag">Capstone</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <p>In the Chat tab, find <strong>Temperature</strong> under Settings in the right sidebar (see the screenshot on <a href="#system-prompt">Write a system prompt</a>). In an API request, it’s the <code>"temperature"</code> field.</p>
+    <ul>
+      <li>To test temperatures fairly, keep the same system prompt and the same test prompt, and start a new chat for every run.</li>
+      <li>Run each setting more than once. One answer can’t show you how consistent a setting is.</li>
+      <li>The capstone uses 0.2 to 0.4 for a fact-based chatbot.</li>
+    </ul>
+    <p>The Settings section also holds Limit Response Length and Context Overflow, and the Sampling section has more options. Every one of them can be saved in a <a href="#presets">preset</a>.</p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="presets" hidden>
+  <p class="crumb">Customize Your Assistant</p>
+  <h1>Save and use presets</h1>
+  <p class="lead">A preset saves your system prompt and settings so you can reuse them in any chat.</p>
+  <div class="page-meta"><span class="tag">A2</span><span class="tag">A3</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <h2 class="sec" id="presets--save-a-preset">Save a preset</h2>
+    <ol>
+      <li>Type your system prompt and set your temperature.</li>
+      <li>In the <strong>Preset</strong> section at the top of the Model Parameters tab, select <strong>Save Preset As…</strong>.</li>
+      <li>Name it <strong>YourName – AssistantName</strong>.</li>
+    </ol>
+    <h2 class="sec" id="presets--use-a-preset">Use a preset</h2>
+    <p>Load the model first, then choose your preset from <strong>Select a Preset…</strong>. Presets don’t save which model is loaded, so tell anyone using your preset which model goes with it.</p>
+    <h2 class="sec" id="presets--find-the-preset-files">Find the preset files</h2>
+    <p>Select the <strong>⋮</strong> button next to Save Preset As…, then Show in Explorer. Presets are JSON files in <code>%USERPROFILE%\.lmstudio\config-presets</code>.</p>
+    <div class="callout warn"><p>The same menu has <strong>Publish</strong>, which shares a preset publicly on the LM Studio Hub for anyone on the internet. It’s not for class.</p></div>
+    <p class="more">More in the official docs: <a href="https://lmstudio.ai/docs/app/presets" target="_blank" rel="noopener">Config presets</a></p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="test-and-improve" hidden>
+  <p class="crumb">Customize Your Assistant</p>
+  <h1>Test and improve an assistant</h1>
+  <p class="lead">Fixed test prompts, honest ratings, and one change at a time turn “it seems to work” into proof.</p>
+  <div class="page-meta"><span class="tag">A2</span><span class="tag">A3</span><span class="tag">Capstone</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <h2 class="sec" id="test-and-improve--write-your-test-prompts-once">Write your test prompts once</h2>
+    <p>Reuse the same prompts every round so you can compare versions fairly. Before you run each one, write down what a good answer would include.</p>
+    <div class="tablewrap"><table>
+      <tr><th>Test type</th><th>What it checks</th></tr>
+      <tr><td>Typical request</td><td>Something real users ask all the time</td></tr>
+      <tr><td>Hard or detailed request</td><td>Whether it holds up when the question gets harder</td></tr>
+      <tr><td>Edge case</td><td>An unusual, vague, or tricky request that tests the limits</td></tr>
+      <tr><td>Out of scope</td><td>Whether it politely declines or redirects</td></tr>
+    </table></div>
+    <h2 class="sec" id="test-and-improve--rate-every-answer">Rate every answer</h2>
+    <p>Assignment 2 uses <strong>Hit</strong> (matches), <strong>Partial</strong> (some of it), or <strong>Miss</strong> (not close). Keep a log of what you changed, why, and the score.</p>
+    <h2 class="sec" id="test-and-improve--iterate">Iterate</h2>
+    <ol>
+      <li>Run all your tests and rate them.</li>
+      <li>Change one or two things.</li>
+      <li>Run all of the tests again. A fix for one test can break another.</li>
+    </ol>
+    <p>Then let a classmate try it without coaching them. Real users always find problems their builders missed. The capstone adds a 20-test plan; see <a href="#test-plan">Test plan and failure causes</a>.</p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="attach-document" hidden>
+  <p class="crumb">Documents</p>
+  <h1>Attach a document</h1>
+  <p class="lead">Give the model a .docx, .pdf, or .txt file to read. It stays on your computer.</p>
+  <div class="page-meta"><span class="tag">A3</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <ol>
+      <li>Start a new chat.</li>
+      <li>Drag the file into the chat, or use the attach button next to the message box.</li>
+      <li>Ask your question. A long document can take a minute or two to process the first time.</li>
+    </ol>
+    <p>All document processing happens on your computer. Nothing you attach leaves LM Studio.</p>
+    <h2 class="sec" id="attach-document--choosing-your-own-document">Choosing your own document</h2>
+    <ul>
+      <li>Good choices: your class notes, a teacher handout, a public rulebook or manual, or a recipe collection.</li>
+      <li>Short is better: 1 to 3 pages will fit in full (see <a href="#full-text-or-rag">Full text or retrieval</a>).</li>
+      <li>Nothing with other people’s personal information, passwords, or account details.</li>
+      <li>Get teacher approval first.</li>
+    </ul>
+    <p class="more">More in the official docs: <a href="https://lmstudio.ai/docs/app/basics/rag" target="_blank" rel="noopener">Chat with documents</a></p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="full-text-or-rag" hidden>
+  <p class="crumb">Documents</p>
+  <h1>Full text or retrieval (RAG)</h1>
+  <p class="lead">Short documents go to the model whole. Long ones get searched for passages that seem related.</p>
+  <div class="page-meta"><span class="tag">A3</span><span class="tag">Capstone</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <div class="tablewrap"><table>
+      <tr><th>Mode</th><th>When LM Studio uses it</th><th>What the model gets</th></tr>
+      <tr><td>Full text</td><td>The document fits in the context length</td><td>The entire document</td></tr>
+      <tr><td>Retrieval (RAG)</td><td>The document is too long to fit</td><td>Only the passages that seem related to your question</td></tr>
+    </table></div>
+    <p>RAG stands for <strong>retrieval-augmented generation</strong>. Retrieval finds the relevant parts of a long document; generation is the model writing its answer. LM Studio’s docs say retrieval sometimes works really well and sometimes needs tuning and experimenting.</p>
+    <div class="callout"><p><strong>Tip from the LM Studio docs:</strong> put as much context in your question as you can, using the terms and words you expect to find in the document. That raises the chance retrieval hands the model the right passages.</p></div>
+    <p>If LM Studio shows which passages it used, check whether they’re the right ones.</p>
+    <p class="more">More in the official docs: <a href="https://lmstudio.ai/docs/app/basics/rag" target="_blank" rel="noopener">Chat with documents</a></p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="grounding" hidden>
+  <p class="crumb">Documents</p>
+  <h1>Keep answers grounded</h1>
+  <p class="lead">Tell the model to answer only from the document, then check its work.</p>
+  <div class="page-meta"><span class="tag">A3</span><span class="tag">Capstone</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <p><strong>Grounding</strong> means making a model answer from a source you give it instead of from memory. A <strong>hallucination</strong> is a confident answer that is made up or wrong.</p>
+    <h2 class="sec" id="grounding--the-document-only-rule-from-assignment-3">The document-only rule from Assignment 3</h2>
+    <div class="codewrap"><pre><code>Answer only using the attached document. If the answer is not in the document, say "The document doesn't say." Do not use outside knowledge, even if it seems more common or more likely.</code></pre><button class="copy" type="button">Copy</button></div>
+    <p>Paste it into the System Prompt box, adapt it to your assistant’s job, and save it in a preset.</p>
+    <h2 class="sec" id="grounding--verify">Verify</h2>
+    <ul>
+      <li>Check each answer against the document yourself. Grounding reduces mistakes; it doesn’t remove them.</li>
+      <li>Record hallucinations exactly as the model wrote them.</li>
+    </ul>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="start-server" hidden>
+  <p class="crumb">Server And API</p>
+  <h1>Start the local server</h1>
+  <p class="lead">Turn LM Studio into a server so programs like the API Explorer and the Chatbot Shell can use your model.</p>
+  <div class="page-meta"><span class="tag">A4</span><span class="tag">A5</span><span class="tag">Capstone</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <ol>
+      <li>Open <strong>Model Server</strong> in the left sidebar and load your model.</li>
+      <li>Open <strong>Server Settings</strong> and make sure <strong>Enable CORS</strong> is on. Without it, LM Studio refuses requests from web pages like the API Explorer.</li>
+      <li>Switch <strong>Status</strong> to <strong>Running</strong>.</li>
+      <li>Note the “Reachable at” address. The default is <code>http://localhost:1234</code>.</li>
+      <li>Leave <strong>Serve on Local Network</strong> off.</li>
+    </ol>
+    <p>To check it’s working, open <code>http://localhost:1234/v1/models</code> in a browser tab. If your browser asks for permission to reach local devices or the local network, choose Allow.</p>
+    <div class="callout warn"><p><strong>When you’re done:</strong> switch Status to Stopped and turn Enable CORS off. While CORS is on, any web page open in your browser can send requests to your server, not just the Explorer.</p></div>
+    <p class="more">More in the official docs: <a href="https://lmstudio.ai/docs/developer/core/server" target="_blank" rel="noopener">LM Studio as a local LLM API server</a>, <a href="https://lmstudio.ai/docs/developer/core/server/settings" target="_blank" rel="noopener">Server settings</a></p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="http-basics" hidden>
+  <p class="crumb">Server And API</p>
+  <h1>Client, server, and HTTP</h1>
+  <p class="lead">The words you need to talk about programs sending requests to LM Studio.</p>
+  <div class="page-meta"><span class="tag">A4</span><span class="tag">A5</span><span class="tag">Capstone</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <div class="tablewrap"><table>
+      <tr><th>Term</th><th>What it means</th></tr>
+      <tr><td>Server</td><td>A program that waits for requests and sends back responses. Here, LM Studio is the server.</td></tr>
+      <tr><td>Client</td><td>A program that sends requests to a server, such as the API Explorer</td></tr>
+      <tr><td>API</td><td>The set of requests a server understands and the responses it sends back</td></tr>
+      <tr><td>localhost</td><td>A name that always means “this computer.” Its address is 127.0.0.1.</td></tr>
+      <tr><td>Port</td><td>A numbered door on a computer that a server listens on. LM Studio uses port 1234 by default.</td></tr>
+      <tr><td>Endpoint</td><td>A specific path on the server that does one job, such as <code>/v1/models</code></td></tr>
+      <tr><td>GET and POST</td><td>HTTP methods. GET asks for information. POST sends data for the server to work on.</td></tr>
+      <tr><td>JSON</td><td>A text format for structured data, made of names and values inside braces <code>{ }</code></td></tr>
+      <tr><td>Status code</td><td>A three-digit number in every HTTP response that says whether the request worked, such as 200 (OK) or 404 (Not Found)</td></tr>
+    </table></div>
+    <h2 class="sec" id="http-basics--status-code-families">Status code families</h2>
+    <div class="tablewrap"><table>
+      <tr><th>Starts with</th><th>Means</th></tr>
+      <tr><td>2</td><td>Success</td></tr>
+      <tr><td>4</td><td>The server got the request, but something about the request was wrong</td></tr>
+      <tr><td>5</td><td>The server got the request, but something went wrong on the server</td></tr>
+    </table></div>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="endpoints" hidden>
+  <p class="crumb">Server And API</p>
+  <h1>LM Studio’s endpoints</h1>
+  <p class="lead">The paths LM Studio’s server answers, and which ones we use.</p>
+  <div class="page-meta"><span class="tag">A4</span><span class="tag">A5</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <p>Every address starts with the server’s base address, <code>http://localhost:1234</code> by default.</p>
+    <div class="tablewrap"><table>
+      <tr><th>Endpoint</th><th>Method</th><th>What it’s for</th><th>We use it</th></tr>
+      <tr><td><code>/v1/models</code></td><td>GET</td><td>List the models the server can use</td><td>A4, A5</td></tr>
+      <tr><td><code>/v1/chat/completions</code></td><td>POST</td><td>Send a conversation and get the model’s reply (text and images)</td><td>A4, A5</td></tr>
+      <tr><td><code>/v1/responses</code></td><td>POST</td><td>A newer OpenAI-style chat endpoint, used by tools such as Codex</td><td>No</td></tr>
+      <tr><td><code>/v1/embeddings</code></td><td>POST</td><td>Turn text into lists of numbers for search and comparison</td><td>No</td></tr>
+      <tr><td><code>/v1/completions</code></td><td>POST</td><td>An older style that continues a piece of text</td><td>No</td></tr>
+      <tr><td><code>/v1/messages</code></td><td>POST</td><td>Anthropic-compatible chat, used by tools such as Claude Code</td><td>No</td></tr>
+      <tr><td><code>/api/v1/chat</code></td><td>POST</td><td>LM Studio’s own native chat endpoint, with its own request format</td><td>No</td></tr>
+    </table></div>
+    <p>“OpenAI-compatible” means programs written for OpenAI’s servers can use LM Studio instead by changing one setting, the base URL, to <code>http://localhost:1234/v1</code>.</p>
+    <p class="more">More in the official docs: <a href="https://lmstudio.ai/docs/api/openai-api" target="_blank" rel="noopener">OpenAI compatibility endpoints</a>, <a href="https://lmstudio.ai/docs/api/rest-api" target="_blank" rel="noopener">LM Studio API</a></p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="api-explorer" hidden>
+  <p class="crumb">Server And API</p>
+  <h1>Use the API Explorer</h1>
+  <p class="lead">The web page from your teacher that sends requests to your server and shows the raw replies.</p>
+  <div class="page-meta"><span class="tag">A4</span><span class="tag">A5</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <p><a href="#start-server">Start the server</a> first, with Enable CORS on. Then open the API Explorer file. Assignment 5 uses an updated version that can handle tool calls.</p>
+    <div class="tablewrap"><table>
+      <tr><th>Control</th><th>What it does</th></tr>
+      <tr><td>Check connection</td><td>Asks the server which models it has. Each model ID appears as a button.</td></tr>
+      <tr><td>Model ID button</td><td>Puts that ID into the request’s <code>"model"</code> field</td></tr>
+      <tr><td>Starter request menu and Load starter</td><td>Fills in a ready-made request: <strong>Basic chat</strong> (Assignment 4) or <strong>Orbitline support desk (with tools)</strong> (Assignment 5)</td></tr>
+      <tr><td>Send request</td><td>Sends the request to your server</td></tr>
+      <tr><td>Show the full HTTP request</td><td>Shows exactly what was sent</td></tr>
+      <tr><td>Raw response</td><td>The full JSON the server sent back</td></tr>
+      <tr><td>Add reply to conversation</td><td>Adds the model’s reply and an empty user message to your request</td></tr>
+      <tr><td>Add tool call to conversation</td><td>Adds the model’s tool call and a tool message, with PASTE THE TOOL RESULT HERE highlighted for you to replace</td></tr>
+    </table></div>
+    <ul>
+      <li>When the model asks for a tool, the Response panel says <strong>The model wants to use a tool</strong> instead of showing an answer.</li>
+      <li>If the Explorer says a tool call was written as plain text, record it as a <strong>malformed tool call</strong>. That’s a real finding, not a mistake on your part.</li>
+      <li>Check that your model ID is in the request every time you load a starter.</li>
+    </ul>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="json" hidden>
+  <p class="crumb">Server And API</p>
+  <h1>Write valid JSON</h1>
+  <p class="lead">The rules that keep your request readable to the server.</p>
+  <div class="page-meta"><span class="tag">A4</span><span class="tag">A5</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <ul>
+      <li>Names and text go between double quotes: <code>"role": "user"</code>.</li>
+      <li>A double quote inside text is written <code>\"</code>.</li>
+      <li>A line break inside text is written <code>\n</code>. Or join the text into one line.</li>
+      <li>Separate items with commas, with no comma after the last item.</li>
+      <li>Every <code>{</code> needs a matching <code>}</code>, and every <code>[</code> needs a matching <code>]</code>.</li>
+    </ul>
+    <p>The API Explorer tells you when your JSON isn’t valid.</p>
+    <h2 class="sec" id="json--example-the-assignment-4-starter-request">Example: the Assignment 4 starter request</h2>
+    <div class="codewrap"><pre><code>{
+  "model": "paste-model-id-here",
+  "messages": [
+    { "role": "system", "content": "You are a helpful assistant. Keep answers short." },
+    { "role": "user", "content": "Say hello in one sentence." }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 200
+}</code></pre><button class="copy" type="button">Copy</button></div>
+    <h2 class="sec" id="json--message-roles">Message roles</h2>
+    <div class="tablewrap"><table>
+      <tr><th>Role</th><th>Who the message is from</th></tr>
+      <tr><td><code>"system"</code></td><td>Instructions that set the model’s role and rules</td></tr>
+      <tr><td><code>"user"</code></td><td>The person asking</td></tr>
+      <tr><td><code>"assistant"</code></td><td>The model’s own earlier replies</td></tr>
+      <tr><td><code>"tool"</code></td><td>A tool’s result, sent back to the model (Assignment 5)</td></tr>
+    </table></div>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="server-security" hidden>
+  <p class="crumb">Server And API</p>
+  <h1>Server security settings</h1>
+  <p class="lead">The Server Settings that control who can reach your server.</p>
+  <div class="page-meta"><span class="tag">A4</span><span class="tag">A5</span><span class="tag">Capstone</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <div class="tablewrap"><table>
+      <tr><th>Setting</th><th>What it does</th><th>In our lab</th></tr>
+      <tr><td>Server Port</td><td>The port number the server listens on (1234 by default)</td><td>Leave it</td></tr>
+      <tr><td>Enable CORS</td><td>Lets web pages in your browser send requests to the server</td><td>On while you work; off at the end of class</td></tr>
+      <tr><td>Serve on Local Network</td><td>Lets other devices on the same network reach your server, not just this computer</td><td>Off</td></tr>
+      <tr><td>Require Authentication</td><td>Accepts only requests that include a valid API token (Manage Tokens creates them)</td><td>Off unless your teacher says otherwise</td></tr>
+    </table></div>
+    <p>LM Studio’s own docs warn that serving beyond localhost and enabling CORS can create security risks, and recommend turning on authentication. Treat any API token like a password: it’s shown once, so copy it somewhere safe and never share it.</p>
+    <p class="more">More in the official docs: <a href="https://lmstudio.ai/docs/developer/core/server/settings" target="_blank" rel="noopener">Server settings</a>, <a href="https://lmstudio.ai/docs/developer/core/server/serve-on-network" target="_blank" rel="noopener">Serve on local network</a>, <a href="https://lmstudio.ai/docs/developer/core/authentication" target="_blank" rel="noopener">Authentication</a></p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="agent-loop" hidden>
+  <p class="crumb">Agents</p>
+  <h1>Chatbots, agents, and the loop</h1>
+  <p class="lead">An agent can ask for tools to be run, not just write text. Every agent runs the same loop.</p>
+  <div class="page-meta"><span class="tag">A5</span><span class="tag">Capstone</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <p>A chatbot can only write text. An agent can also take actions: look things up, change files, send messages. The model asks for a tool, a program runs it, and the result goes back to the model. In Assignment 5, you play the program.</p>
+    <div class="figure">
+      <svg viewBox="0 0 720 232" role="img" aria-labelledby="loopTitle loopDesc">
+        <title id="loopTitle">The agent loop</title>
+        <desc id="loopDesc">A question goes to the model. The model either writes a final answer or makes a tool call. A program runs the tool, and the tool result goes back to the model. This repeats as many times as needed.</desc>
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="dg-head" d="M0,0 L10,5 L0,10 z"/></marker>
+        </defs>
+        <rect class="dg-box" x="8" y="86" width="132" height="50" rx="10"/>
+        <text class="dg-label" x="74" y="108" text-anchor="middle">Question</text>
+        <text class="dg-sub" x="74" y="125" text-anchor="middle">from the user</text>
+
+        <rect class="dg-model" x="196" y="86" width="132" height="50" rx="10"/>
+        <text class="dg-label" x="262" y="108" text-anchor="middle">Model</text>
+        <text class="dg-sub" x="262" y="125" text-anchor="middle">decides what’s next</text>
+
+        <rect class="dg-box" x="392" y="10" width="152" height="50" rx="10"/>
+        <text class="dg-label" x="468" y="32" text-anchor="middle">Tool call</text>
+        <text class="dg-sub" x="468" y="49" text-anchor="middle">name + arguments</text>
+
+        <rect class="dg-prog" x="572" y="86" width="140" height="50" rx="10"/>
+        <text class="dg-label" x="642" y="108" text-anchor="middle">Program</text>
+        <text class="dg-sub" x="642" y="125" text-anchor="middle">runs the tool</text>
+
+        <rect class="dg-box" x="392" y="162" width="152" height="50" rx="10"/>
+        <text class="dg-label" x="468" y="184" text-anchor="middle">Tool result</text>
+        <text class="dg-sub" x="468" y="201" text-anchor="middle">role: "tool"</text>
+
+        <rect class="dg-box" x="196" y="176" width="132" height="50" rx="10"/>
+        <text class="dg-label" x="262" y="198" text-anchor="middle">Final answer</text>
+        <text class="dg-sub" x="262" y="215" text-anchor="middle">to the user</text>
+
+        <line class="dg-arrow" x1="140" y1="111" x2="192" y2="111" marker-end="url(#ah)"/>
+        <path class="dg-arrow" d="M328,98 C360,70 370,40 388,36" marker-end="url(#ah)"/>
+        <path class="dg-arrow" d="M544,36 C590,40 630,58 638,82" marker-end="url(#ah)"/>
+        <path class="dg-arrow" d="M638,136 C630,166 590,184 548,186" marker-end="url(#ah)"/>
+        <path class="dg-arrow" d="M392,186 C362,184 344,160 330,128" marker-end="url(#ah)"/>
+        <line class="dg-arrow" x1="262" y1="136" x2="262" y2="172" marker-end="url(#ah)"/>
+        <text class="dg-loop" x="468" y="116" text-anchor="middle">repeat as needed</text>
+      </svg>
+    </div>
+    <div class="tablewrap"><table>
+      <tr><th>Term</th><th>What it means</th></tr>
+      <tr><td>Agent</td><td>A model that can take actions by asking for tools to be run, not just write text</td></tr>
+      <tr><td>Tool</td><td>A function a program can run for the model, such as looking up an order</td></tr>
+      <tr><td>Tool definition</td><td>A JSON description of a tool: its name, what it does, and what inputs it needs. The model reads it to decide when to use the tool.</td></tr>
+      <tr><td>Tool call</td><td>The model’s request to run a tool, with the inputs it chose. It appears in <code>"tool_calls"</code> instead of an answer.</td></tr>
+      <tr><td>Tool result</td><td>What the tool sends back. It goes into the conversation as a message with <code>"role": "tool"</code>.</td></tr>
+      <tr><td>Agent loop</td><td>Question, tool call, tool result, answer, repeated as many times as needed</td></tr>
+    </table></div>
+    <p>The model never sees the database or the tool’s code. It sees only the tool definitions and the results it’s handed.</p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="tool-definition" hidden>
+  <p class="crumb">Agents</p>
+  <h1>Write a tool definition</h1>
+  <p class="lead">A JSON description that tells the model what a tool does, when to use it, and what inputs it needs.</p>
+  <div class="page-meta"><span class="tag">A5</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <div class="codewrap"><pre><code>{
+  "type": "function",
+  "function": {
+    "name": "your_tool_name",
+    "description": "What the tool does and when to use it.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "input_name": { "type": "string", "description": "What this input is." }
+      },
+      "required": ["input_name"]
+    }
+  }
+}</code></pre><button class="copy" type="button">Copy</button></div>
+    <div class="tablewrap"><table>
+      <tr><th>Part</th><th>What to write</th></tr>
+      <tr><td><code>name</code></td><td>A short name in the same style as <code>lookup_order</code> or <code>check_warranty</code></td></tr>
+      <tr><td><code>description</code></td><td>What the tool does and when to use it</td></tr>
+      <tr><td><code>properties</code></td><td>Each input the tool needs, with its type and a description</td></tr>
+      <tr><td><code>required</code></td><td>Which inputs must always be filled in</td></tr>
+    </table></div>
+    <h2 class="sec" id="tool-definition--test-your-tool">Test your tool</h2>
+    <ol>
+      <li>Load the Orbitline starter and replace the system message’s content with your own system prompt.</li>
+      <li>Replace everything inside the <code>"tools"</code> list’s square brackets with your definition.</li>
+      <li>Ask a question that should make the model use your tool, and send it.</li>
+      <li>If the model calls your tool, make up a realistic tool result, paste it in, and send again to finish the loop.</li>
+    </ol>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="permission-levels" hidden>
+  <p class="crumb">Agents</p>
+  <h1>Permission levels</h1>
+  <p class="lead">A rule for whether a tool may run on its own, must ask a person first, or is never allowed.</p>
+  <div class="page-meta"><span class="tag">A5</span><span class="tag">Capstone</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <div class="tablewrap"><table>
+      <tr><th>Level</th><th>Example from Assignment 5 (a biology study coach)</th></tr>
+      <tr><td>Runs on its own</td><td><code>lookup_flashcards(topic)</code> only reads flashcards and changes nothing.</td></tr>
+      <tr><td>Ask first</td><td><code>save_score(score)</code> changes a record.</td></tr>
+      <tr><td>Never allowed</td><td>A tool that emails a parent</td></tr>
+    </table></div>
+    <p>In the capstone, anything risky belongs in your never rules. Good never rules are specific and testable, such as “never give a grade or a test answer.”</p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="chatbot-shell" hidden>
+  <p class="crumb">Capstone</p>
+  <h1>The Chatbot Shell</h1>
+  <p class="lead">The file from your teacher where you build, test, and save your capstone chatbot.</p>
+  <div class="page-meta"><span class="tag">Capstone</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <h2 class="sec" id="chatbot-shell--before-you-open-it">Before you open it</h2>
+    <p><a href="#start-server">Start the server</a> with your approved model loaded, Enable CORS on, and Status set to Running. Then open <code>chatbot-shell.html</code>.</p>
+    <h2 class="sec" id="chatbot-shell--build-a-version">Build a version</h2>
+    <div class="tablewrap"><table>
+      <tr><th>Section</th><th>What to do</th></tr>
+      <tr><td>Identity</td><td>Enter your chatbot’s name and a welcome message that tells users what it can help with.</td></tr>
+      <tr><td>Instructions</td><td>Write your system prompt. Start from the template on <a href="#knowledge-base">Build a clean knowledge base</a>.</td></tr>
+      <tr><td>Knowledge base</td><td>Paste it in or load your .txt files, then select <strong>Measure exact size</strong>.</td></tr>
+      <tr><td>Settings</td><td>Temperature between 0.2 and 0.4. Context length set to the value your teacher used when loading the model. Keep <strong>Mode A</strong>.</td></tr>
+      <tr><td>Connection</td><td>Select <strong>Detect model</strong>.</td></tr>
+    </table></div>
+    <p>Ask three quick questions to make sure it works. Then select <strong>Save chatbot file</strong>: it downloads the version as its own file. Move it to your class folder and open it to confirm it starts straight in the chat window.</p>
+    <h2 class="sec" id="chatbot-shell--buttons-you-ll-use-while-testing">Buttons you’ll use while testing</h2>
+    <div class="tablewrap"><table>
+      <tr><th>Button</th><th>Use it to</th></tr>
+      <tr><td>New conversation</td><td>Start fresh before every test</td></tr>
+      <tr><td>Copy conversation</td><td>Keep a transcript of a failed test for your notes</td></tr>
+      <tr><td>Edit chatbot</td><td>Change the prompt, knowledge base, or settings</td></tr>
+      <tr><td>Save chatbot file</td><td>Save the next version (v2, v3, and so on)</td></tr>
+    </table></div>
+    <h2 class="sec" id="chatbot-shell--mode-a-and-mode-b">Mode A and Mode B</h2>
+    <p>In Mode A, the model reads your whole knowledge base with every message, so first answers slow down as the knowledge base grows. Mode B is the optional experiment at the end of Phase 5, where the model has to search the knowledge base with tool calls. Compare its score and response times with your best Mode A version.</p>
+    <div class="callout warn"><p><strong>Long conversations drift.</strong> Rules slip and answers slow down as the context fills. The shell warns you at 85% full; start a new conversation.</p></div>
+    <div class="callout"><p>A saved chatbot file stores your prompt and knowledge base as plain text. Anyone who opens it can select Edit chatbot and read them, so keep private information out.</p></div>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="knowledge-base" hidden>
+  <p class="crumb">Capstone</p>
+  <h1>Build a clean knowledge base</h1>
+  <p class="lead">Small, organized, and correct beats big. Clean it, then measure it.</p>
+  <div class="page-meta"><span class="tag">Capstone</span><span class="tag">A3</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <h2 class="sec" id="knowledge-base--cleaning-checklist">Cleaning checklist</h2>
+    <ul>
+      <li>One topic per section, each starting with a heading line that begins with <code>#</code></li>
+      <li>Facts written as complete, specific sentences, with names, dates, and numbers spelled out</li>
+      <li>No contradictions: each fact appears once, or is stated the same way everywhere</li>
+      <li>The same name used for each thing throughout</li>
+      <li>The questions users will really ask answered directly (a short Q&amp;A section helps)</li>
+      <li>Nothing private about anyone: no grades, phone numbers, addresses, or personal details</li>
+      <li>Text copied from PDFs or Word cleaned of page numbers, headers, and broken lines</li>
+    </ul>
+    <h2 class="sec" id="knowledge-base--size-budget">Size budget</h2>
+    <p>Select <strong>Measure exact size</strong> in the Chatbot Shell. Aim for <strong>under 50%</strong> of the context. Above 70%, you must trim.</p>
+    <h2 class="sec" id="knowledge-base--trimming">Trimming</h2>
+    <p>Cut anything your users won’t ask about, turn long paragraphs into short facts, and remove repeated information.</p>
+    <h2 class="sec" id="knowledge-base--system-prompt-template">System prompt template</h2>
+    <div class="codewrap"><pre><code>You are [name], a [role] for [users]. Your job is to [task]. Answer only using the knowledge base. If the answer is not in the knowledge base, say: "I don't have that information. Please ask [person or place]." Never [never rule 1]. Never [never rule 2]. If someone asks about something outside [topic], politely explain what you can help with. Keep answers [length and style].</code></pre><button class="copy" type="button">Copy</button></div>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="test-plan" hidden>
+  <p class="crumb">Capstone</p>
+  <h1>Test plan and failure causes</h1>
+  <p class="lead">Twenty tests across six categories, and how to find out why a test failed.</p>
+  <div class="page-meta"><span class="tag">Capstone</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <p>Your chatbot ships when it passes <strong>at least 18 of 20 tests</strong> and <strong>never</strong> breaks a never rule.</p>
+    <div class="tablewrap"><table>
+      <tr><th>Category</th><th>How many</th><th>What it checks</th><th>Passes if</th></tr>
+      <tr><td>Direct facts</td><td>5</td><td>Questions that use the knowledge base’s own words</td><td>The answer is correct</td></tr>
+      <tr><td>Paraphrased</td><td>4</td><td>The same kinds of facts, asked in different words</td><td>The answer is correct</td></tr>
+      <tr><td>Combined</td><td>3</td><td>Answers that need two or more sections</td><td>The answer is complete and correct</td></tr>
+      <tr><td>Not covered</td><td>3</td><td>On-topic questions the knowledge base doesn’t answer</td><td>It says it doesn’t have the information instead of guessing</td></tr>
+      <tr><td>Rule tests</td><td>3</td><td>Attempts to break a never rule or pull it off topic</td><td>It follows its rules</td></tr>
+      <tr><td>Follow-up</td><td>2</td><td>A second question that depends on the first answer</td><td>It uses the earlier conversation correctly</td></tr>
+    </table></div>
+    <h2 class="sec" id="test-plan--one-test-cycle">One test cycle</h2>
+    <ol>
+      <li>Open your latest version file.</li>
+      <li>Select <strong>New conversation</strong> before each test. For follow-ups, send the first message, then the follow-up in the same conversation.</li>
+      <li>Mark each test P (pass) or F (fail). For each failure, select <strong>Copy conversation</strong> and keep the transcript.</li>
+      <li>Find the cause with the table below. Make one or two changes, then save the next version.</li>
+      <li>Run all 20 tests again on the new version.</li>
+    </ol>
+    <h2 class="sec" id="test-plan--finding-the-cause">Finding the cause</h2>
+    <div class="tablewrap"><table>
+      <tr><th>Cause</th><th>Signs</th><th>Fix</th></tr>
+      <tr><td>Knowledge base gap</td><td>The answer isn’t in the knowledge base, or it’s unclear</td><td>Add or rewrite that fact</td></tr>
+      <tr><td>Contradiction</td><td>The knowledge base says two different things</td><td>Keep one version of the fact</td></tr>
+      <tr><td>Weak rule</td><td>It ignores a format, boundary, or never rule</td><td>Make the rule shorter and more specific, and move it earlier in the prompt</td></tr>
+      <tr><td>Settings</td><td>Answers ramble, change every time, or get cut off</td><td>Lower the temperature, or adjust max response tokens</td></tr>
+      <tr><td>Too big</td><td>Slow first answers, errors, or long conversations breaking</td><td>Trim the knowledge base, start new conversations, or ask about a larger context</td></tr>
+      <tr><td>Model limit</td><td>It still fails after several different fixes</td><td>Narrow the chatbot’s job, or ask your teacher about another approved model</td></tr>
+    </table></div>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="shortcuts" hidden>
+  <p class="crumb">Help</p>
+  <h1>Keyboard shortcuts</h1>
+  <p class="lead">Shortcuts from the LM Studio docs and the app. Some need Developer mode.</p>
+  <div class="page-meta"><span class="tag all">All assignments</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <div class="tablewrap"><table>
+      <tr><th>Keys</th><th>What it does</th></tr>
+      <tr><td><kbd>Ctrl</kbd> + <kbd>N</kbd></td><td>New chat</td></tr>
+      <tr><td><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>N</kbd></td><td>New chat folder</td></tr>
+      <tr><td><kbd>Ctrl</kbd> + <kbd>E</kbd></td><td>Open the System Prompt in a bigger editor</td></tr>
+      <tr><td><kbd>Ctrl</kbd> + <kbd>,</kbd></td><td>Open Settings</td></tr>
+      <tr><td><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>R</kbd></td><td>Open runtime settings (the engines)</td></tr>
+      <tr><td><kbd>Ctrl</kbd> + <kbd>K</kbd>, then <kbd>T</kbd></td><td>Open the theme picker</td></tr>
+    </table></div>
+    <p>In this wiki, press <kbd>Ctrl</kbd> + <kbd>K</kbd> or <kbd>/</kbd> to search, and <kbd>Esc</kbd> to close the search.</p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="troubleshooting" hidden>
+  <p class="crumb">Help</p>
+  <h1>Troubleshooting</h1>
+  <p class="lead">Problems that come up in the lab, and what to try first.</p>
+  <div class="page-meta"><span class="tag all">All assignments</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <div class="tablewrap"><table>
+      <tr><th>What you see</th><th>Likely cause</th><th>Try this</th></tr>
+      <tr><td>The installer asks for an administrator password</td><td>Installing needs permission on school computers</td><td>Ask your teacher</td></tr>
+      <tr><td>LM Studio asks you to sign in</td><td>Optional account prompt</td><td>Skip it; nothing in class needs an account</td></tr>
+      <tr><td>No load settings or speed stats</td><td>Developer mode is off</td><td>Settings › Developer</td></tr>
+      <tr><td>Model Search shows nothing</td><td>No internet connection</td><td>Searching and downloading need the internet; chatting doesn’t</td></tr>
+      <tr><td>A model won’t load, or the computer slows to a crawl</td><td>Not enough free RAM</td><td>Eject other models, close other apps, or pick a smaller model. Check <a href="#fit-and-speed">Will it fit?</a></td></tr>
+      <tr><td>GPU Offload is grayed out</td><td>The graphics engine isn’t available</td><td>Write it down and tell your teacher</td></tr>
+      <tr><td>Answers get slower during one chat</td><td>The chat is filling the context</td><td>Start a new chat</td></tr>
+      <tr><td>The model ignores a rule in your system prompt</td><td>The rule is long, vague, or buried</td><td>Make it shorter and more specific, and move it earlier</td></tr>
+      <tr><td>Your preset loads, but the model is wrong</td><td>Presets don’t save the model</td><td>Load the right model first, then pick the preset</td></tr>
+      <tr><td>An attached document takes a long time</td><td>Long documents are processed the first time you attach them</td><td>Wait a minute or two</td></tr>
+      <tr><td>Answers miss what’s in a long document</td><td>Retrieval didn’t pick the right passages</td><td>Use words from the document in your question. See <a href="#full-text-or-rag">Full text or retrieval</a>.</td></tr>
+      <tr><td><code>localhost:1234/v1/models</code> won’t open in the browser</td><td>The server isn’t running, or it’s on a different port</td><td>Switch Status to Running and check the “Reachable at” address</td></tr>
+      <tr><td>The browser tab works, but the Explorer or Chatbot Shell can’t connect</td><td>Enable CORS is off, or the browser blocked local access</td><td>Turn on Enable CORS in Server Settings. If the browser asks to reach local devices, choose Allow.</td></tr>
+      <tr><td>The Explorer says your JSON isn’t valid</td><td>A missing quote, comma, or bracket</td><td>See <a href="#json">Write valid JSON</a></td></tr>
+      <tr><td>The Explorer reports a malformed tool call</td><td>The model wrote the tool call as plain text</td><td>Record it as a finding; it’s not your mistake</td></tr>
+      <tr><td>The Chatbot Shell warns the context is 85% full</td><td>The conversation and knowledge base are filling the context</td><td>Select New conversation. If it happens early, trim the knowledge base.</td></tr>
+    </table></div>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="file-locations" hidden>
+  <p class="crumb">Help</p>
+  <h1>Where LM Studio keeps things</h1>
+  <p class="lead">Folders on a Windows computer where your chats, presets, and models live.</p>
+  <div class="page-meta"><span class="tag">A1</span><span class="tag">A2</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <div class="tablewrap"><table>
+      <tr><th>What</th><th>Where</th></tr>
+      <tr><td>Chats</td><td><code>%USERPROFILE%\.lmstudio\conversations</code>. Right-click a chat › Show in File Explorer.</td></tr>
+      <tr><td>Presets you made</td><td><code>%USERPROFILE%\.lmstudio\config-presets</code></td></tr>
+      <tr><td>Presets from the LM Studio Hub</td><td><code>%USERPROFILE%\.lmstudio\hub</code></td></tr>
+      <tr><td>Models</td><td>The Library page shows the models folder and lets you change it. Inside, each model sits in a publisher folder, then a model folder.</td></tr>
+    </table></div>
+    <div class="callout warn"><p>Chats are stored as JSON files. Don’t edit them by hand.</p></div>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="glossary" hidden>
+  <p class="crumb">Help</p>
+  <h1>Glossary</h1>
+  <p class="lead">Every term from the course, A to Z.</p>
+  <div class="page-meta"><span class="tag all">All assignments</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <div class="tablewrap"><table>
+      <tr><th>Term</th><th>What it means</th></tr>
+      <tr><td>Agent</td><td>A model that can take actions by asking for tools to be run, not just write text</td></tr>
+      <tr><td>Agent loop</td><td>Question, tool call, tool result, answer, repeated as many times as needed</td></tr>
+      <tr><td>API</td><td>The set of requests a server understands and the responses it sends back</td></tr>
+      <tr><td>API token</td><td>A secret key a program sends to prove it may use the server, when Require Authentication is on</td></tr>
+      <tr><td>Citation</td><td>A note showing which part of a document an answer came from</td></tr>
+      <tr><td>Client</td><td>A program that sends requests to a server</td></tr>
+      <tr><td>Context length</td><td>How much text the model can hold at once: system prompt, documents, your messages, and its replies</td></tr>
+      <tr><td>CORS</td><td>A server setting that lets web pages in a browser send it requests</td></tr>
+      <tr><td>Edge case</td><td>An unusual or tricky request that tests the limits of your assistant</td></tr>
+      <tr><td>Endpoint</td><td>A specific path on the server that does one job, such as <code>/v1/models</code></td></tr>
+      <tr><td>Full-text mode</td><td>When a document fits in the context, LM Studio gives the model the entire document</td></tr>
+      <tr><td>GET and POST</td><td>HTTP methods. GET asks for information; POST sends data for the server to work on.</td></tr>
+      <tr><td>GGUF</td><td>The model file format (<code>.gguf</code>) we download and run on Windows</td></tr>
+      <tr><td>GPU Offload</td><td>How much of a model runs on the graphics chip instead of the CPU</td></tr>
+      <tr><td>Grounding</td><td>Making a model answer from a source you give it instead of from memory</td></tr>
+      <tr><td>Hallucination</td><td>A confident answer that is made up or wrong</td></tr>
+      <tr><td>Iteration</td><td>Changing one thing, testing again, and keeping what works</td></tr>
+      <tr><td>JSON</td><td>A text format for structured data, made of names and values inside braces</td></tr>
+      <tr><td>Knowledge base</td><td>The facts your capstone chatbot answers from</td></tr>
+      <tr><td>llama.cpp</td><td>The engine LM Studio uses to run GGUF models</td></tr>
+      <tr><td>llmster</td><td>LM Studio without a window, for servers</td></tr>
+      <tr><td>lms</td><td>LM Studio’s command-line tool</td></tr>
+      <tr><td>Loading</td><td>Setting aside RAM and putting a model’s weights into it so you can use the model</td></tr>
+      <tr><td>localhost</td><td>A name that always means “this computer” (127.0.0.1)</td></tr>
+      <tr><td>MCP</td><td>Model Context Protocol, a standard way to connect models to outside tools and services</td></tr>
+      <tr><td>Memory bandwidth</td><td>How fast data moves between RAM and the processor. The main speed limit for local models.</td></tr>
+      <tr><td>Never rule</td><td>Something your chatbot must never do. Its tests must pass every time.</td></tr>
+      <tr><td>NPU</td><td>A neural processing unit, a chip built into newer processors for some AI tasks. LM Studio doesn’t use it.</td></tr>
+      <tr><td>Open-weight model</td><td>A model whose weight files are published so you can download and run it yourself</td></tr>
+      <tr><td>Parameters</td><td>The model’s learned numbers. “4B” means about 4 billion.</td></tr>
+      <tr><td>Permission level</td><td>A rule for whether a tool may run on its own, must ask a person first, or is never allowed</td></tr>
+      <tr><td>Port</td><td>A numbered door a server listens on. LM Studio uses 1234 by default.</td></tr>
+      <tr><td>Preset</td><td>A saved bundle of a system prompt and settings that you can reuse in any chat</td></tr>
+      <tr><td>Quantization</td><td>Compressing a model’s numbers to save space. Lower Q means a smaller file and slightly lower quality.</td></tr>
+      <tr><td>Retrieval (RAG)</td><td>When a document is too long to fit, LM Studio pulls out only the passages that seem related to your question. RAG stands for retrieval-augmented generation.</td></tr>
+      <tr><td>Runtime</td><td>An engine that runs models, such as the CPU engine or Vulkan</td></tr>
+      <tr><td>Server</td><td>A program that waits for requests and sends back responses</td></tr>
+      <tr><td>Status code</td><td>A three-digit number in every HTTP response that says whether the request worked</td></tr>
+      <tr><td>System prompt</td><td>Instructions the model reads before every message. It sets the assistant’s role, rules, and style.</td></tr>
+      <tr><td>Temperature</td><td>A setting that controls randomness. Low is predictable; high is varied and sometimes off track.</td></tr>
+      <tr><td>Test prompt</td><td>A message you reuse every round so you can compare versions fairly</td></tr>
+      <tr><td>Time to first token</td><td>How long you wait before the answer starts appearing</td></tr>
+      <tr><td>Token</td><td>A chunk of text, roughly three-quarters of a word. Models read and write in tokens.</td></tr>
+      <tr><td>Tokens per second (tok/s)</td><td>How fast the model writes. About 7 tok/s feels like normal reading speed.</td></tr>
+      <tr><td>Tool</td><td>A function a program can run for the model</td></tr>
+      <tr><td>Tool call</td><td>The model’s request to run a tool, with the inputs it chose</td></tr>
+      <tr><td>Tool definition</td><td>A JSON description of a tool: name, what it does, and what inputs it needs</td></tr>
+      <tr><td>Tool result</td><td>What the tool sends back, as a message with <code>"role": "tool"</code></td></tr>
+      <tr><td>VRAM</td><td>Memory on a separate graphics card. Our lab computers don’t have one.</td></tr>
+    </table></div>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="cli" hidden>
+  <p class="crumb">Beyond Our Lab</p>
+  <h1>The lms command line</h1>
+  <p class="lead">LM Studio’s terminal tool. It comes with the app and can do most of what the windows do.</p>
+  <div class="page-meta"><span class="tag off">Not in class</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <div class="callout warn"><p>Use the terminal on a lab computer only when your teacher says so.</p></div>
+    <p>Open a terminal and type <code>lms</code> to see every command. LM Studio has to run at least once before <code>lms</code> works.</p>
+    <div class="tablewrap"><table>
+      <tr><th>Command</th><th>What it does</th></tr>
+      <tr><td><code>lms ls</code></td><td>List the models downloaded to this computer, with their sizes</td></tr>
+      <tr><td><code>lms ps</code></td><td>List the models loaded in memory right now</td></tr>
+      <tr><td><code>lms get &lt;model&gt;</code></td><td>Search for and download a model</td></tr>
+      <tr><td><code>lms load &lt;model&gt; --context-length 4096</code></td><td>Load a model with a set context length (<code>--gpu 0</code> to <code>--gpu max</code> sets GPU Offload)</td></tr>
+      <tr><td><code>lms load --estimate-only &lt;model&gt;</code></td><td>Print how much memory a model would need, without loading it</td></tr>
+      <tr><td><code>lms unload --all</code></td><td>Eject every loaded model</td></tr>
+      <tr><td><code>lms chat &lt;model&gt;</code></td><td>Chat with a model in the terminal (<code>-s</code> sets a system prompt)</td></tr>
+      <tr><td><code>lms server start</code> and <code>lms server stop</code></td><td>Start and stop the local server</td></tr>
+      <tr><td><code>lms log stream</code></td><td>Show the exact text sent to and from the model</td></tr>
+    </table></div>
+    <p class="more">More in the official docs: <a href="https://lmstudio.ai/docs/cli" target="_blank" rel="noopener">lms, LM Studio’s CLI</a></p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="sdks" hidden>
+  <p class="crumb">Beyond Our Lab</p>
+  <h1>Python and TypeScript</h1>
+  <p class="lead">Code libraries that talk to LM Studio, for when you want to build your own app.</p>
+  <div class="page-meta"><span class="tag off">Not in class</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <p>Everything you did in the API Explorer can be done in code. LM Studio has its own libraries, and because its server is OpenAI-compatible, code written for OpenAI works too once its base URL points at <code>http://localhost:1234/v1</code>.</p>
+    <div class="tablewrap"><table>
+      <tr><th>Library</th><th>Install</th></tr>
+      <tr><td>lmstudio-python</td><td><code>pip install lmstudio</code></td></tr>
+      <tr><td>lmstudio-js (TypeScript and JavaScript)</td><td><code>npm install @lmstudio/sdk</code></td></tr>
+    </table></div>
+    <p>A first Python program, from the LM Studio docs:</p>
+    <div class="codewrap"><pre><code>import lmstudio as lms
+
+model = lms.llm("qwen/qwen3-4b-2507")
+result = model.respond("What is the meaning of life?")
+print(result)</code></pre><button class="copy" type="button">Copy</button></div>
+    <p>Installing libraries usually needs permissions lab computers don’t give students. Try this at home.</p>
+    <p class="more">More in the official docs: <a href="https://lmstudio.ai/docs/python" target="_blank" rel="noopener">lmstudio-python</a>, <a href="https://lmstudio.ai/docs/typescript" target="_blank" rel="noopener">lmstudio-js</a>, <a href="https://lmstudio.ai/docs/api/openai-api" target="_blank" rel="noopener">OpenAI compatibility</a></p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="mcp" hidden>
+  <p class="crumb">Beyond Our Lab</p>
+  <h1>MCP servers</h1>
+  <p class="lead">Add-ons that give a model tools such as search, files, or other apps.</p>
+  <div class="page-meta"><span class="tag off">Not in class</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <p>MCP (Model Context Protocol) is a standard way to connect models to outside tools. LM Studio can act as an MCP host: you list servers in a file called <code>mcp.json</code>, and the model can call their tools during a chat. It’s the same agent loop from Assignment 5, with a program doing the work you did by hand.</p>
+    <div class="callout stop"><p>The LM Studio docs warn: never install MCP servers from sources you don’t trust. Some can run any code, read your files, and use your network connection.</p></div>
+    <p>MCP servers built for large cloud models can also use so many tokens that a small local model runs out of context.</p>
+    <p class="more">More in the official docs: <a href="https://lmstudio.ai/docs/app/mcp" target="_blank" rel="noopener">Use MCP servers</a></p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="link-bionic-agents" hidden>
+  <p class="crumb">Beyond Our Lab</p>
+  <h1>LM Link, Bionic, and coding agents</h1>
+  <p class="lead">Features you’ll see in the docs that need accounts, cloud credits, or much bigger computers.</p>
+  <div class="page-meta"><span class="tag off">Not in class</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <div class="tablewrap"><table>
+      <tr><th>Feature</th><th>What it does</th><th>Why we don’t use it</th></tr>
+      <tr><td>LM Link</td><td>Connects your own devices over an encrypted network (built with Tailscale), so a laptop or phone can use models running on a powerful desktop</td><td>Needs an LM Studio account and the internet, and connects to other devices</td></tr>
+      <tr><td>LM Studio Bionic</td><td>A separate agent app for coding and document work, with projects, sessions, and skills. It can run local models or cloud models.</td><td>Cloud models need an account and cost credits; we use classic LM Studio</td></tr>
+      <tr><td>Coding agents (Claude Code, Codex, Hermes Agent, OpenClaw)</td><td>Programming tools that can use LM Studio’s server as their model</td><td>The docs recommend about 25,000 to 64,000 tokens of context, far beyond what we load in class</td></tr>
+    </table></div>
+    <p class="more">More in the official docs: <a href="https://lmstudio.ai/docs/lmlink" target="_blank" rel="noopener">LM Link</a>, <a href="https://lmstudio.ai/docs/bionic" target="_blank" rel="noopener">Bionic</a>, <a href="https://lmstudio.ai/docs/integrations" target="_blank" rel="noopener">Integrations</a></p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="advanced" hidden>
+  <p class="crumb">Beyond Our Lab</p>
+  <h1>Advanced settings</h1>
+  <p class="lead">Features in Developer mode that we don’t need, and what they’re for.</p>
+  <div class="page-meta"><span class="tag off">Not in class</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <div class="tablewrap"><table>
+      <tr><th>Feature</th><th>What it does</th></tr>
+      <tr><td>Speculative decoding</td><td>A small “draft” model guesses the next tokens and the main model checks them, which can speed up writing. Running two models uses more memory, and it only helps when the draft model is much smaller and often right.</td></tr>
+      <tr><td>Max Concurrent Predictions</td><td>Lets the server work on several requests at once instead of in a line (default 4)</td></tr>
+      <tr><td>Prompt template</td><td>The hidden format that wraps each message before the model sees it. LM Studio sets it automatically; you rarely need to change it.</td></tr>
+      <tr><td>Just-in-time loading and idle TTL</td><td>Lets the server load a model when a request asks for it, then unload it after a period with no requests (60 minutes by default)</td></tr>
+      <tr><td>Structured output</td><td>Forces the model’s answer to follow a JSON layout you define</td></tr>
+      <tr><td>model.yaml</td><td>A file that describes a model and all its versions in one place. Every model in LM Studio’s catalog uses one.</td></tr>
+    </table></div>
+    <p class="more">More in the official docs: <a href="https://lmstudio.ai/docs/app/advanced/speculative-decoding" target="_blank" rel="noopener">Speculative decoding</a>, <a href="https://lmstudio.ai/docs/app/advanced/parallel-requests" target="_blank" rel="noopener">Parallel requests</a>, <a href="https://lmstudio.ai/docs/app/advanced/prompt-template" target="_blank" rel="noopener">Prompt template</a>, <a href="https://lmstudio.ai/docs/developer/core/ttl-and-auto-evict" target="_blank" rel="noopener">Idle TTL</a></p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+<article class="page" id="sources" hidden>
+  <p class="crumb">Beyond Our Lab</p>
+  <h1>Sources</h1>
+  <p class="lead">Where this wiki’s information comes from.</p>
+  <div class="page-meta"><span class="tag all">All assignments</span></div>
+  <details class="toc-inline" hidden><summary><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</summary><ol></ol></details>
+  <div class="prose">
+    <ul>
+      <li>Course handouts: Assignments 1 to 5 and the Capstone, including the Assignment 1 approved model list and Before You Begin sheet</li>
+      <li><a href="https://lmstudio.ai/docs/app" target="_blank" rel="noopener">LM Studio app docs</a>, read November 4, 2026</li>
+      <li><a href="https://lmstudio.ai/docs/developer" target="_blank" rel="noopener">LM Studio developer docs</a> and <a href="https://lmstudio.ai/docs/api" target="_blank" rel="noopener">API docs</a></li>
+      <li><a href="https://lmstudio.ai/docs/cli" target="_blank" rel="noopener">lms CLI docs</a>, <a href="https://lmstudio.ai/docs/python" target="_blank" rel="noopener">Python</a> and <a href="https://lmstudio.ai/docs/typescript" target="_blank" rel="noopener">TypeScript</a> SDK docs</li>
+      <li><a href="https://lmstudio.ai/docs/bionic" target="_blank" rel="noopener">Bionic</a>, <a href="https://lmstudio.ai/docs/lmlink" target="_blank" rel="noopener">LM Link</a>, and <a href="https://lmstudio.ai/docs/integrations" target="_blank" rel="noopener">Integrations</a> docs</li>
+    </ul>
+    <p>LM Studio changes often. If a button or menu doesn’t match what you see, check the official docs and tell your teacher.</p>
+  </div>
+  <nav class="pager" aria-label="Previous and next pages"></nav>
+</article>
+  </main>
+  <aside class="toc" id="toc" aria-label="On this page">
+    <p class="toc-title"><svg class="i " width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>On this page</p>
+    <ol id="tocList"></ol>
+  </aside>
+</div>
+
+<div class="search-overlay" id="searchOverlay" hidden>
+  <div class="search-dialog" role="dialog" aria-modal="true" aria-label="Search the wiki">
+    <div class="search-head"><svg class="i " width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="sq" type="search" placeholder="Search the wiki" autocomplete="off" aria-controls="sres"><button type="button" class="esc" id="searchClose">Esc</button></div>
+    <ul id="sres" role="listbox"></ul>
+  </div>
+</div>
+
+<script src="assets/js/wiki.js"></script>
+</body>
+</html>
